@@ -3,18 +3,27 @@
     <SVGGenerator
       :x-colour="colour"
       :segments="segments"
+      :x-border="border"
       :thickness="thickness"
       :line-thickness="lineThickness"
+      :stroke-thickness="strokeThickness"
     />
     <div class="container">
       <div class="columns">
-        <div class="column is-offset-2">
+        <div class="column is-offset-1">
           <form class="form">
             <div class="field">
               <div class="in in0">
                 <label class="label">X Colour</label>
                 <sketch
                   v-model="xColour"
+                  :presetColors="xColourPresets"
+                />
+              </div>
+              <div class="in in1">
+                <label class="label">X Border Colour</label>
+                <sketch
+                  v-model="xBorder"
                   :presetColors="xColourPresets"
                 />
               </div>
@@ -39,7 +48,7 @@
                 <vue-slider
                   v-model="thickness"
                   :min="0"
-                  :max="5"
+                  :max="10"
                   :interval="0.1"
                 ></vue-slider>
               </div>
@@ -49,6 +58,17 @@
               <div class="slider">
                 <vue-slider
                   v-model="lineThickness"
+                  :min="0"
+                  :max="10"
+                  :interval="0.1"
+                ></vue-slider>
+              </div>
+            </div>
+            <div class="field">
+              <label class="label">X Border Thickness</label>
+              <div class="slider">
+                <vue-slider
+                  v-model="strokeThickness"
                   :min="0"
                   :max="3"
                   :interval="0.1"
@@ -94,7 +114,7 @@
             </div>
           </form>
         </div>
-        <div class="column is-2" />
+        <div class="column is-1" />
       </div>
     </div>
   </div>
@@ -124,10 +144,14 @@
         segment1: {
           hex: '#00A8F7'
         },
+        xBorder: {
+          hex: '#E31133'
+        },
         xColourPresets: ['#E31133', '#4A37BC'],
         segmentPresets: ['#009DE7', '#00A8F7'],
         thickness: 1.5,
         lineThickness: 0.0,
+        strokeThickness: 0.0,
         filename: 'Logo.png',
         svgname: 'Logo.svg',
         size: 1024
@@ -137,6 +161,9 @@
     computed: {
       colour () {
         return this.xColour.hex
+      },
+      border () {
+        return this.xBorder.hex
       },
       segments () {
         return [
@@ -154,8 +181,10 @@
           .replace('var(--x-colour)', this.xColour.hex)
           .replace('var(--segment-0)', this.segment0.hex)
           .replace('var(--segment-1)', this.segment1.hex)
+          .replace('var(--x-border-colour)', this.xBorder)
           .replace('var(--border-thickness)', this.thickness)
           .replace('var(--line-thickness)', this.lineThickness)
+          .replace('var(--stroke-thickness)', this.strokeThickness)
       },
       reset (e) {
         e.preventDefault()
@@ -168,8 +197,12 @@
         this.segment1 = {
           hex: '#00A8F7'
         }
+        this.xBorder = {
+          hex: '#E31133'
+        }
         this.thickness = 1.5
         this.lineThickness = 0.0
+        this.strokeThickness = 0.0
       },
       save (e) {
         e.preventDefault()

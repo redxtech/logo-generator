@@ -111,6 +111,11 @@
           return ['#009DE7', '#00A8F7']
         }
       },
+      xBorder: {
+        type: String,
+        required: false,
+        default: '#E31133'
+      },
       thickness: {
         type: Number,
         required: false,
@@ -120,6 +125,11 @@
         type: Number,
         required: false,
         default: 0.5
+      },
+      strokeThickness: {
+        type: Number,
+        required: false,
+        default: 0.0
       }
     },
     data () {
@@ -135,21 +145,29 @@
         this.svg.style.setProperty(`--segment-0`, this.segments[0])
         this.svg.style.setProperty(`--segment-1`, this.segments[1])
       },
+      xBorder (val) {
+        this.svg.style.setProperty('--x-border', val)
+      },
       thickness () {
         this.svg.style.setProperty(`--border-thickness`, this.thickness)
       },
       lineThickness () {
         this.svg.style.setProperty(`--line-thickness`, this.lineThickness)
+      },
+      strokeThickness () {
+        this.svg.style.setProperty(`--stroke-thickness`, this.strokeThickness)
       }
     },
     mounted () {
       const svg = window.document.querySelector('#svg')
       this.svg = svg
       svg.style.setProperty('--x-color', this.xColour)
+      svg.style.setProperty('--x-border', this.xBorder)
       svg.style.setProperty(`--segment-0`, this.segments[0])
       svg.style.setProperty(`--segment-1`, this.segments[1])
       svg.style.setProperty(`--border-thickness`, this.thickness)
       svg.style.setProperty(`--line-thickness`, this.lineThickness)
+      svg.style.setProperty(`--stroke-thickness`, this.strokeThickness)
     }
   }
 </script>
@@ -160,8 +178,10 @@
     --x-colour: #E31133;
     --segment-0: #009DE7;
     --segment-1: #00A8F7;
+    --x-border: #E31133;
     --border-thickness: 1.5;
     --line-thickness: 0.0;
+    --stroke-thickness: 0.0;
 
     margin: 1rem auto;
     max-width: 400px;
@@ -184,6 +204,8 @@
   }
 
   .x {
+    stroke: var(--x-border);
+    stroke-width: var(--stroke-thickness);
     fill: var(--x-colour);
   }
 
