@@ -70,7 +70,20 @@
                   class="button is-info"
                   @click="save"
                 >
-                  Export
+                  Export PNG
+                </a>
+              </div>
+            </div>
+            <div class="field has-addons">
+              <div class="control">
+                <input v-model="svgname" class="input" type="text" placeholder="Logo.svg">
+              </div>
+              <div class="control">
+                <a
+                  class="button is-info"
+                  @click="saveSVG"
+                >
+                  Export SVG
                 </a>
               </div>
             </div>
@@ -91,7 +104,7 @@
   import SVGGenerator from './components/SVGComponent.vue'
   import { Sketch } from 'vue-color'
   import VueSlider from 'vue-slider-component'
-  import { saveSvgAsPng } from 'save-svg-as-png'
+  import { saveSvgAsPng, saveSvg } from 'save-svg-as-png'
 
   export default {
     name: 'app',
@@ -116,6 +129,7 @@
         thickness: 1.5,
         lineThickness: 0.0,
         filename: 'Logo.png',
+        svgname: 'Logo.svg',
         size: 1024
         // size: 2048
       }
@@ -162,6 +176,12 @@
         saveSvgAsPng(document.querySelector('#svg svg'), this.filename, {
           encoderOptions: 1,
           // scale: this.scale,
+          modifyStyle: this.modifyStyle
+        })
+      },
+      saveSVG (e) {
+        e.preventDefault()
+        saveSvg(document.querySelector('#svg svg'), this.svgname, {
           modifyStyle: this.modifyStyle
         })
       }
