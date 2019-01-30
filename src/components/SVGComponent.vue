@@ -19,12 +19,10 @@
         points="144.7,211.8 144.7,408.5 310.1,506.8 475.4,408.5 475.4,211.8 310.1,113.5"
       />
       <!-- X in middle of hexagon -->
-      <text
-        transform="matrix(1 0 0 1 203.5 432.6)"
-        class="st2"
-      >
-        X
-      </text>
+      <path
+        class="x"
+        d=" M 375.363 432.18 L 314.475 317.484 L 305.271 317.484 L 244.737 432.18 L 210.753 432.18 L 279.429 305.802 L 215.355 187.92 L 248.985 187.92 L 304.917 293.412 L 315.183 293.412 L 371.115 187.92 L 404.745 187.92 L 340.317 305.802 L 409.347 432.18 L 375.363 432.18 Z "
+      />
       <!--Segments to fill in hexagon-->
       <polygon
         class="segment0"
@@ -124,7 +122,7 @@
         default: 0.5
       }
     },
-    date () {
+    data () {
       return {
         svg: undefined
       }
@@ -185,9 +183,7 @@
     stroke-miterlimit: 10;
   }
 
-  .st2 {
-    font-family: 'Exo 2', sans-serif;
-    font-size: 354.591px;
+  .x {
     fill: var(--x-colour);
   }
 
