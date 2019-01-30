@@ -152,8 +152,8 @@
       modifyStyle (styles) {
         return styles
           .replace('var(--x-colour)', this.xColour.hex)
-          .replace('var(--seg-0)', this.segment0.hex)
-          .replace('var(--seg-1)', this.segment1.hex)
+          .replace('var(--segment-0)', this.segment0.hex)
+          .replace('var(--segment-1)', this.segment1.hex)
           .replace('var(--border-thickness)', this.thickness)
           .replace('var(--line-thickness)', this.lineThickness)
       },
